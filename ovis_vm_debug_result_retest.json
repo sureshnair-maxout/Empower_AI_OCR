@@ -1,0 +1,302 @@
+{
+  "vm_url": "http://64.247.196.84:8000",
+  "candidates": [
+    "http://64.247.196.84:8000",
+    "http://64.247.196.84:8000:8000",
+    "http://64.247.196.84:8000:11434",
+    "http://64.247.196.84:8000:7860"
+  ],
+  "probe": {
+    "http://64.247.196.84:8000": {
+      "openai_models": {
+        "status": 200,
+        "url": "http://64.247.196.84:8000/v1/models",
+        "ok": true,
+        "body_preview": "{\"object\":\"list\",\"data\":[{\"id\":\"AIDC-AI/Ovis2.5-9B\",\"object\":\"model\",\"owned_by\":\"self-hosted\"}]}"
+      },
+      "openai_chat": {
+        "status": 422,
+        "url": "http://64.247.196.84:8000/v1/chat/completions",
+        "ok": true,
+        "body_preview": "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"messages\"],\"msg\":\"Field required\",\"input\":{\"model\":\"dummy\",\"stream\":false}}]}"
+      },
+      "ollama_tags": {
+        "status": 404,
+        "url": "http://64.247.196.84:8000/api/tags",
+        "ok": true,
+        "body_preview": "{\"detail\":\"Not Found\"}"
+      },
+      "ollama_generate": {
+        "status": 404,
+        "url": "http://64.247.196.84:8000/api/generate",
+        "ok": true,
+        "body_preview": "{\"detail\":\"Not Found\"}"
+      },
+      "gradio_root": {
+        "status": 404,
+        "url": "http://64.247.196.84:8000/",
+        "ok": true,
+        "body_preview": "{\"detail\":\"Not Found\"}"
+      },
+      "gradio_info": {
+        "status": 404,
+        "url": "http://64.247.196.84:8000/info",
+        "ok": true,
+        "body_preview": "{\"detail\":\"Not Found\"}"
+      },
+      "gradio_config": {
+        "status": 404,
+        "url": "http://64.247.196.84:8000/config",
+        "ok": true,
+        "body_preview": "{\"detail\":\"Not Found\"}"
+      }
+    },
+    "http://64.247.196.84:8000:8000": {
+      "openai_models": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:8000/v1/models",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:8000/v1/models"
+      },
+      "openai_chat": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:8000/v1/chat/completions",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:8000/v1/chat/completions"
+      },
+      "ollama_tags": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:8000/api/tags",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:8000/api/tags"
+      },
+      "ollama_generate": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:8000/api/generate",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:8000/api/generate"
+      },
+      "gradio_root": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:8000/",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:8000/"
+      },
+      "gradio_info": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:8000/info",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:8000/info"
+      },
+      "gradio_config": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:8000/config",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:8000/config"
+      }
+    },
+    "http://64.247.196.84:8000:11434": {
+      "openai_models": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:11434/v1/models",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:11434/v1/models"
+      },
+      "openai_chat": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:11434/v1/chat/completions",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:11434/v1/chat/completions"
+      },
+      "ollama_tags": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:11434/api/tags",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:11434/api/tags"
+      },
+      "ollama_generate": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:11434/api/generate",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:11434/api/generate"
+      },
+      "gradio_root": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:11434/",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:11434/"
+      },
+      "gradio_info": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:11434/info",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:11434/info"
+      },
+      "gradio_config": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:11434/config",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:11434/config"
+      }
+    },
+    "http://64.247.196.84:8000:7860": {
+      "openai_models": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:7860/v1/models",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:7860/v1/models"
+      },
+      "openai_chat": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:7860/v1/chat/completions",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:7860/v1/chat/completions"
+      },
+      "ollama_tags": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:7860/api/tags",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:7860/api/tags"
+      },
+      "ollama_generate": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:7860/api/generate",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:7860/api/generate"
+      },
+      "gradio_root": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:7860/",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:7860/"
+      },
+      "gradio_info": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:7860/info",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:7860/info"
+      },
+      "gradio_config": {
+        "status": null,
+        "url": "http://64.247.196.84:8000:7860/config",
+        "ok": false,
+        "error": "Failed to parse: http://64.247.196.84:8000:7860/config"
+      }
+    }
+  },
+  "selected_openai_base": "http://64.247.196.84:8000",
+  "selected_gradio_base": null,
+  "invoke_status": 200,
+  "invoke_raw": "{\"id\":\"chatcmpl-ovis-local\",\"object\":\"chat.completion\",\"created\":1773687579,\"model\":\"AIDC-AI/Ovis2.5-9B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"```json\\n{\\n  \\\"vendor_details\\\": {\\n    \\\"vendor_name\\\": \\\"Hitesh Enterprises Pvt Ltd\\\",\\n    \\\"vendor_name_confidence\\\": 0.95,\\n    \\\"vendor_address\\\": \\\"#9, First Floor, 7th Cross Balaji Layout, Malathahalli Bangalore-560091\\\",\\n    \\\"vendor_address_confidence\\\": 0.95,\\n    \\\"vendor_gst_no\\\": \\\"29AAFCH4715H1ZI\\\",\\n    \\\"vendor_gst_no_confidence\\\": 0.95,\\n    \\\"vendor_mobile_no_1\\\": \\\"9008149000\\\",\\n    \\\"vendor_mobile_no_1_confidence\\\": 0.95,\\n    \\\"vendor_mobile_no_2\\\": \\\"\\\",\\n    \\\"vendor_mobile_no_2_confidence\\\": 0,\\n    \\\"email_id\\\": \\\"hiteshjadav.enterprises@gmail.com\\\",\\n    \\\"email_id_confidence\\\": 0.95,\\n    \\\"agent_broker_name\\\": \\\"\\\",\\n    \\\"agent_broker_name_confidence\\\": 0\\n  },\\n  \\\"invoice_details\\\": {\\n    \\\"invoice_date\\\": \\\"4-Apr-25\\\",\\n    \\\"invoice_date_confidence\\\": 0.95,\\n    \\\"invoice_no\\\": \\\"25-26/0077\\\",\\n    \\\"invoice_no_confidence\\\": 0.95,\\n    \\\"invoice_type\\\": \\\"Tax Invoice\\\",\\n    \\\"invoice_type_confidence\\\": 0.95,\\n    \\\"bill_to\\\": \\\"Nutri Feeds & Farms Pvt. Ltd.\\\",\\n    \\\"bill_to_confidence\\\": 0.95,\\n    \\\"po_no\\\": \\\"NF/PO/0425-43\\\",\\n    \\\"po_no_confidence\\\": 0.95,\\n    \\\"eway_bill_no\\\": \\\"122083160281\\\",\\n    \\\"eway_bill_no_confidence\\\": 0.95,\\n    \\\"acknowledge_no\\\": \\\"112524463506362\\\",\\n    \\\"acknowledge_no_confidence\\\": 0.95\\n  },\\n  \\\"transport_details\\\": {\\n    \\\"vehicle_no\\\": \\\"KA51AD2853\\\",\\n    \\\"vehicle_no_confidence\\\": 0.95,\\n    \\\"driver_name\\\": \\\"T BEGUR\\\",\\n    \\\"driver_name_confidence\\\": 0.95,\\n    \\\"driver_no\\\": \\\"\\\",\\n    \\\"driver_no_confidence\\\": 0\\n  },\\n  \\\"bank_details\\\": {\\n    \\\"account_holder_name\\\": \\\"Hitesh Enterprises Pvt Ltd\\\",\\n    \\\"account_holder_name_confidence\\\": 0.95,\\n    \\\"account_number\\\": \\\"921030010017008\\\",\\n    \\\"account_number_confidence\\\": 0.95,\\n    \\\"ifsc_code\\\": \\\"UTIB00016541\\\",\\n    \\\"ifsc_code_confidence\\\": 0.95\\n  },\\n  \\\"items\\\": [\\n    {\\n      \\\"item_no\\\": \\\"1\\\",\\n      \\\"item_no_confidence\\\": 0.95,\\n      \\\"item_name\\\": \\\"INFECTIOUS CORYZA - ICK - 1000 DOSES\\\",\\n      \\\"item_name_confidence\\\": 0.95,\\n      \\\"hsn_code\\\": \\\"30023000\\\",\\n      \\\"hsn_code_confidence\\\": 0.95,\\n      \\\"gst_percent\\\": \\\"5\\\",\\n      \\\"gst_percent_confidence\\\": 0.95,\\n      \\\"uom\\\": \\\"No's\\\",\\n      \\\"uom_confidence\\\": 0.95,\\n      \\\"quantity\\\": \\\"36\\\",\\n      \\\"quantity_confidence\\\": 0.95,\\n      \\\"rate\\\": \\\"1704\\\",\\n      \\\"rate_confidence\\\": 0.95,\\n      \\\"amount\\\": \\\"58276.80\\\",\\n      \\\"amount_confidence\\\": 0.95\\n    },\\n    {\\n      \\\"item_no\\\": \\\"2\\\",\\n      \\\"item_no_confidence\\\": 0.95,\\n      \\\"item_name\\\": \\\"FCK-1000 DOSES(FOWL CHOLERA VAC INACTIVATED IP VET)\\\",\\n      \\\"item_name_confidence\\\": 0.95,\\n      \\\"hsn_code\\\": \\\"30023000\\\",\\n      \\\"hsn_code_confidence\\\": 0.95,\\n      \\\"gst_percent\\\": \\\"5\\\",\\n      \\\"gst_percent_confidence\\\": 0.95,\\n      \\\"uom\\\": \\\"No's\\\",\\n      \\\"uom_confidence\\\": 0.95,\\n      \\\"quantity\\\": \\\"36\\\",\\n      \\\"quantity_confidence\\\": 0.95,\\n      \\\"rate\\\": \\\"1040\\\",\\n      \\\"rate_confidence\\\": 0.95,\\n      \\\"amount\\\": \\\"35568.00\\\",\\n      \\\"amount_confidence\\\": 0.95\\n    }\\n  ]\\n}\\n```\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":0,\"completion_tokens\":0,\"total_tokens\":0}}",
+  "invoke_parsed": {
+    "id": "chatcmpl-ovis-local",
+    "object": "chat.completion",
+    "created": 1773687579,
+    "model": "AIDC-AI/Ovis2.5-9B",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "```json\n{\n  \"vendor_details\": {\n    \"vendor_name\": \"Hitesh Enterprises Pvt Ltd\",\n    \"vendor_name_confidence\": 0.95,\n    \"vendor_address\": \"#9, First Floor, 7th Cross Balaji Layout, Malathahalli Bangalore-560091\",\n    \"vendor_address_confidence\": 0.95,\n    \"vendor_gst_no\": \"29AAFCH4715H1ZI\",\n    \"vendor_gst_no_confidence\": 0.95,\n    \"vendor_mobile_no_1\": \"9008149000\",\n    \"vendor_mobile_no_1_confidence\": 0.95,\n    \"vendor_mobile_no_2\": \"\",\n    \"vendor_mobile_no_2_confidence\": 0,\n    \"email_id\": \"hiteshjadav.enterprises@gmail.com\",\n    \"email_id_confidence\": 0.95,\n    \"agent_broker_name\": \"\",\n    \"agent_broker_name_confidence\": 0\n  },\n  \"invoice_details\": {\n    \"invoice_date\": \"4-Apr-25\",\n    \"invoice_date_confidence\": 0.95,\n    \"invoice_no\": \"25-26/0077\",\n    \"invoice_no_confidence\": 0.95,\n    \"invoice_type\": \"Tax Invoice\",\n    \"invoice_type_confidence\": 0.95,\n    \"bill_to\": \"Nutri Feeds & Farms Pvt. Ltd.\",\n    \"bill_to_confidence\": 0.95,\n    \"po_no\": \"NF/PO/0425-43\",\n    \"po_no_confidence\": 0.95,\n    \"eway_bill_no\": \"122083160281\",\n    \"eway_bill_no_confidence\": 0.95,\n    \"acknowledge_no\": \"112524463506362\",\n    \"acknowledge_no_confidence\": 0.95\n  },\n  \"transport_details\": {\n    \"vehicle_no\": \"KA51AD2853\",\n    \"vehicle_no_confidence\": 0.95,\n    \"driver_name\": \"T BEGUR\",\n    \"driver_name_confidence\": 0.95,\n    \"driver_no\": \"\",\n    \"driver_no_confidence\": 0\n  },\n  \"bank_details\": {\n    \"account_holder_name\": \"Hitesh Enterprises Pvt Ltd\",\n    \"account_holder_name_confidence\": 0.95,\n    \"account_number\": \"921030010017008\",\n    \"account_number_confidence\": 0.95,\n    \"ifsc_code\": \"UTIB00016541\",\n    \"ifsc_code_confidence\": 0.95\n  },\n  \"items\": [\n    {\n      \"item_no\": \"1\",\n      \"item_no_confidence\": 0.95,\n      \"item_name\": \"INFECTIOUS CORYZA - ICK - 1000 DOSES\",\n      \"item_name_confidence\": 0.95,\n      \"hsn_code\": \"30023000\",\n      \"hsn_code_confidence\": 0.95,\n      \"gst_percent\": \"5\",\n      \"gst_percent_confidence\": 0.95,\n      \"uom\": \"No's\",\n      \"uom_confidence\": 0.95,\n      \"quantity\": \"36\",\n      \"quantity_confidence\": 0.95,\n      \"rate\": \"1704\",\n      \"rate_confidence\": 0.95,\n      \"amount\": \"58276.80\",\n      \"amount_confidence\": 0.95\n    },\n    {\n      \"item_no\": \"2\",\n      \"item_no_confidence\": 0.95,\n      \"item_name\": \"FCK-1000 DOSES(FOWL CHOLERA VAC INACTIVATED IP VET)\",\n      \"item_name_confidence\": 0.95,\n      \"hsn_code\": \"30023000\",\n      \"hsn_code_confidence\": 0.95,\n      \"gst_percent\": \"5\",\n      \"gst_percent_confidence\": 0.95,\n      \"uom\": \"No's\",\n      \"uom_confidence\": 0.95,\n      \"quantity\": \"36\",\n      \"quantity_confidence\": 0.95,\n      \"rate\": \"1040\",\n      \"rate_confidence\": 0.95,\n      \"amount\": \"35568.00\",\n      \"amount_confidence\": 0.95\n    }\n  ]\n}\n```"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0
+    }
+  },
+  "invoke_content": "```json\n{\n  \"vendor_details\": {\n    \"vendor_name\": \"Hitesh Enterprises Pvt Ltd\",\n    \"vendor_name_confidence\": 0.95,\n    \"vendor_address\": \"#9, First Floor, 7th Cross Balaji Layout, Malathahalli Bangalore-560091\",\n    \"vendor_address_confidence\": 0.95,\n    \"vendor_gst_no\": \"29AAFCH4715H1ZI\",\n    \"vendor_gst_no_confidence\": 0.95,\n    \"vendor_mobile_no_1\": \"9008149000\",\n    \"vendor_mobile_no_1_confidence\": 0.95,\n    \"vendor_mobile_no_2\": \"\",\n    \"vendor_mobile_no_2_confidence\": 0,\n    \"email_id\": \"hiteshjadav.enterprises@gmail.com\",\n    \"email_id_confidence\": 0.95,\n    \"agent_broker_name\": \"\",\n    \"agent_broker_name_confidence\": 0\n  },\n  \"invoice_details\": {\n    \"invoice_date\": \"4-Apr-25\",\n    \"invoice_date_confidence\": 0.95,\n    \"invoice_no\": \"25-26/0077\",\n    \"invoice_no_confidence\": 0.95,\n    \"invoice_type\": \"Tax Invoice\",\n    \"invoice_type_confidence\": 0.95,\n    \"bill_to\": \"Nutri Feeds & Farms Pvt. Ltd.\",\n    \"bill_to_confidence\": 0.95,\n    \"po_no\": \"NF/PO/0425-43\",\n    \"po_no_confidence\": 0.95,\n    \"eway_bill_no\": \"122083160281\",\n    \"eway_bill_no_confidence\": 0.95,\n    \"acknowledge_no\": \"112524463506362\",\n    \"acknowledge_no_confidence\": 0.95\n  },\n  \"transport_details\": {\n    \"vehicle_no\": \"KA51AD2853\",\n    \"vehicle_no_confidence\": 0.95,\n    \"driver_name\": \"T BEGUR\",\n    \"driver_name_confidence\": 0.95,\n    \"driver_no\": \"\",\n    \"driver_no_confidence\": 0\n  },\n  \"bank_details\": {\n    \"account_holder_name\": \"Hitesh Enterprises Pvt Ltd\",\n    \"account_holder_name_confidence\": 0.95,\n    \"account_number\": \"921030010017008\",\n    \"account_number_confidence\": 0.95,\n    \"ifsc_code\": \"UTIB00016541\",\n    \"ifsc_code_confidence\": 0.95\n  },\n  \"items\": [\n    {\n      \"item_no\": \"1\",\n      \"item_no_confidence\": 0.95,\n      \"item_name\": \"INFECTIOUS CORYZA - ICK - 1000 DOSES\",\n      \"item_name_confidence\": 0.95,\n      \"hsn_code\": \"30023000\",\n      \"hsn_code_confidence\": 0.95,\n      \"gst_percent\": \"5\",\n      \"gst_percent_confidence\": 0.95,\n      \"uom\": \"No's\",\n      \"uom_confidence\": 0.95,\n      \"quantity\": \"36\",\n      \"quantity_confidence\": 0.95,\n      \"rate\": \"1704\",\n      \"rate_confidence\": 0.95,\n      \"amount\": \"58276.80\",\n      \"amount_confidence\": 0.95\n    },\n    {\n      \"item_no\": \"2\",\n      \"item_no_confidence\": 0.95,\n      \"item_name\": \"FCK-1000 DOSES(FOWL CHOLERA VAC INACTIVATED IP VET)\",\n      \"item_name_confidence\": 0.95,\n      \"hsn_code\": \"30023000\",\n      \"hsn_code_confidence\": 0.95,\n      \"gst_percent\": \"5\",\n      \"gst_percent_confidence\": 0.95,\n      \"uom\": \"No's\",\n      \"uom_confidence\": 0.95,\n      \"quantity\": \"36\",\n      \"quantity_confidence\": 0.95,\n      \"rate\": \"1040\",\n      \"rate_confidence\": 0.95,\n      \"amount\": \"35568.00\",\n      \"amount_confidence\": 0.95\n    }\n  ]\n}\n```",
+  "invoke_json_candidate": "{\n  \"vendor_details\": {\n    \"vendor_name\": \"Hitesh Enterprises Pvt Ltd\",\n    \"vendor_name_confidence\": 0.95,\n    \"vendor_address\": \"#9, First Floor, 7th Cross Balaji Layout, Malathahalli Bangalore-560091\",\n    \"vendor_address_confidence\": 0.95,\n    \"vendor_gst_no\": \"29AAFCH4715H1ZI\",\n    \"vendor_gst_no_confidence\": 0.95,\n    \"vendor_mobile_no_1\": \"9008149000\",\n    \"vendor_mobile_no_1_confidence\": 0.95,\n    \"vendor_mobile_no_2\": \"\",\n    \"vendor_mobile_no_2_confidence\": 0,\n    \"email_id\": \"hiteshjadav.enterprises@gmail.com\",\n    \"email_id_confidence\": 0.95,\n    \"agent_broker_name\": \"\",\n    \"agent_broker_name_confidence\": 0\n  },\n  \"invoice_details\": {\n    \"invoice_date\": \"4-Apr-25\",\n    \"invoice_date_confidence\": 0.95,\n    \"invoice_no\": \"25-26/0077\",\n    \"invoice_no_confidence\": 0.95,\n    \"invoice_type\": \"Tax Invoice\",\n    \"invoice_type_confidence\": 0.95,\n    \"bill_to\": \"Nutri Feeds & Farms Pvt. Ltd.\",\n    \"bill_to_confidence\": 0.95,\n    \"po_no\": \"NF/PO/0425-43\",\n    \"po_no_confidence\": 0.95,\n    \"eway_bill_no\": \"122083160281\",\n    \"eway_bill_no_confidence\": 0.95,\n    \"acknowledge_no\": \"112524463506362\",\n    \"acknowledge_no_confidence\": 0.95\n  },\n  \"transport_details\": {\n    \"vehicle_no\": \"KA51AD2853\",\n    \"vehicle_no_confidence\": 0.95,\n    \"driver_name\": \"T BEGUR\",\n    \"driver_name_confidence\": 0.95,\n    \"driver_no\": \"\",\n    \"driver_no_confidence\": 0\n  },\n  \"bank_details\": {\n    \"account_holder_name\": \"Hitesh Enterprises Pvt Ltd\",\n    \"account_holder_name_confidence\": 0.95,\n    \"account_number\": \"921030010017008\",\n    \"account_number_confidence\": 0.95,\n    \"ifsc_code\": \"UTIB00016541\",\n    \"ifsc_code_confidence\": 0.95\n  },\n  \"items\": [\n    {\n      \"item_no\": \"1\",\n      \"item_no_confidence\": 0.95,\n      \"item_name\": \"INFECTIOUS CORYZA - ICK - 1000 DOSES\",\n      \"item_name_confidence\": 0.95,\n      \"hsn_code\": \"30023000\",\n      \"hsn_code_confidence\": 0.95,\n      \"gst_percent\": \"5\",\n      \"gst_percent_confidence\": 0.95,\n      \"uom\": \"No's\",\n      \"uom_confidence\": 0.95,\n      \"quantity\": \"36\",\n      \"quantity_confidence\": 0.95,\n      \"rate\": \"1704\",\n      \"rate_confidence\": 0.95,\n      \"amount\": \"58276.80\",\n      \"amount_confidence\": 0.95\n    },\n    {\n      \"item_no\": \"2\",\n      \"item_no_confidence\": 0.95,\n      \"item_name\": \"FCK-1000 DOSES(FOWL CHOLERA VAC INACTIVATED IP VET)\",\n      \"item_name_confidence\": 0.95,\n      \"hsn_code\": \"30023000\",\n      \"hsn_code_confidence\": 0.95,\n      \"gst_percent\": \"5\",\n      \"gst_percent_confidence\": 0.95,\n      \"uom\": \"No's\",\n      \"uom_confidence\": 0.95,\n      \"quantity\": \"36\",\n      \"quantity_confidence\": 0.95,\n      \"rate\": \"1040\",\n      \"rate_confidence\": 0.95,\n      \"amount\": \"35568.00\",\n      \"amount_confidence\": 0.95\n    }\n  ]\n}",
+  "invoke_json": {
+    "vendor_details": {
+      "vendor_name": "Hitesh Enterprises Pvt Ltd",
+      "vendor_name_confidence": 0.95,
+      "vendor_address": "#9, First Floor, 7th Cross Balaji Layout, Malathahalli Bangalore-560091",
+      "vendor_address_confidence": 0.95,
+      "vendor_gst_no": "29AAFCH4715H1ZI",
+      "vendor_gst_no_confidence": 0.95,
+      "vendor_mobile_no_1": "9008149000",
+      "vendor_mobile_no_1_confidence": 0.95,
+      "vendor_mobile_no_2": "",
+      "vendor_mobile_no_2_confidence": 0,
+      "email_id": "hiteshjadav.enterprises@gmail.com",
+      "email_id_confidence": 0.95,
+      "agent_broker_name": "",
+      "agent_broker_name_confidence": 0
+    },
+    "invoice_details": {
+      "invoice_date": "4-Apr-25",
+      "invoice_date_confidence": 0.95,
+      "invoice_no": "25-26/0077",
+      "invoice_no_confidence": 0.95,
+      "invoice_type": "Tax Invoice",
+      "invoice_type_confidence": 0.95,
+      "bill_to": "Nutri Feeds & Farms Pvt. Ltd.",
+      "bill_to_confidence": 0.95,
+      "po_no": "NF/PO/0425-43",
+      "po_no_confidence": 0.95,
+      "eway_bill_no": "122083160281",
+      "eway_bill_no_confidence": 0.95,
+      "acknowledge_no": "112524463506362",
+      "acknowledge_no_confidence": 0.95
+    },
+    "transport_details": {
+      "vehicle_no": "KA51AD2853",
+      "vehicle_no_confidence": 0.95,
+      "driver_name": "T BEGUR",
+      "driver_name_confidence": 0.95,
+      "driver_no": "",
+      "driver_no_confidence": 0
+    },
+    "bank_details": {
+      "account_holder_name": "Hitesh Enterprises Pvt Ltd",
+      "account_holder_name_confidence": 0.95,
+      "account_number": "921030010017008",
+      "account_number_confidence": 0.95,
+      "ifsc_code": "UTIB00016541",
+      "ifsc_code_confidence": 0.95
+    },
+    "items": [
+      {
+        "item_no": "1",
+        "item_no_confidence": 0.95,
+        "item_name": "INFECTIOUS CORYZA - ICK - 1000 DOSES",
+        "item_name_confidence": 0.95,
+        "hsn_code": "30023000",
+        "hsn_code_confidence": 0.95,
+        "gst_percent": "5",
+        "gst_percent_confidence": 0.95,
+        "uom": "No's",
+        "uom_confidence": 0.95,
+        "quantity": "36",
+        "quantity_confidence": 0.95,
+        "rate": "1704",
+        "rate_confidence": 0.95,
+        "amount": "58276.80",
+        "amount_confidence": 0.95
+      },
+      {
+        "item_no": "2",
+        "item_no_confidence": 0.95,
+        "item_name": "FCK-1000 DOSES(FOWL CHOLERA VAC INACTIVATED IP VET)",
+        "item_name_confidence": 0.95,
+        "hsn_code": "30023000",
+        "hsn_code_confidence": 0.95,
+        "gst_percent": "5",
+        "gst_percent_confidence": 0.95,
+        "uom": "No's",
+        "uom_confidence": 0.95,
+        "quantity": "36",
+        "quantity_confidence": 0.95,
+        "rate": "1040",
+        "rate_confidence": 0.95,
+        "amount": "35568.00",
+        "amount_confidence": 0.95
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "input": "paddleocr_basic_result.json",
+  "model": "llama3.2:3b",
+  "focus_lines_count": 42,
+  "result": {
+    "invoice_number": "25-26/0077",
+    "evidence_text": "25-26/0077",
+    "evidence_bbox": [
+      766,
+      326,
+      863,
+      349
+    ],
+    "reason": "heuristic_neighbor_match"
+  },
+  "raw_llm_response": "```json\n{\n  \"invoice_number\": null,\n  \"evidence_text\": null,\n  \"evidence_bbox\": null,\n  \"reason\": \"No 'Seller Invoice Number' found.\"\n}\n```"
+}

@@ -1,0 +1,24 @@
+{
+  "file": "D:\\Documents\\0124.pdf",
+  "model": "llama3.2:3b",
+  "fields": {
+    "invoice_number": "25-26/0077",
+    "irn": "9ea0cb41b30933fd1e2b883b227c73c4da05b",
+    "invoice_date": "4-Apr-25",
+    "seller_name": "Hitesh Enterprises Pvt Ltd",
+    "buyer_name": "Nutri Feeds & Farms Pvt. Ltd.",
+    "total_amount": "98,537.00",
+    "currency": "INR"
+  },
+  "heuristic_hints": {
+    "invoice_number": "25-26/0077",
+    "irn": "9ea0cb41b30933fd1e2b883b227c73c4da05b",
+    "invoice_date": "4-Apr-25",
+    "seller_name": "Hitesh Enterprises Pvt Ltd",
+    "buyer_name": "Nutri Feeds & Farms Pvt. Ltd.",
+    "total_amount": "98,537.00",
+    "currency": "INR"
+  },
+  "raw_llm_response": "This is a JSON object representing an invoice, likely for tax purposes. It contains various details about the goods being sold, including their price, quantity, and tax information.\n\nHere are some key points from the JSON object:\n\n* The invoice total is INR 98,537.00.\n* The tax amount is INR 93,844.80 (25% of the total).\n* The company's PAN number is AAFCH4715H.\n* The whole sale drug license number is KA-B32-168532 and KA-B32-158534.\n* The retail drug license number is KA-B32-158533 and KA-B32-158535.\n* The bank details are for Axis Bank with account number 17009.\n\nIt's worth noting that this JSON object appears to be in a format commonly used for electronic invoicing in India, known as GST (Goods and Services Tax) invoices. However, without more context or information about the specific requirements of the tax authority in question, it's difficult to say for certain whether this is a valid or complete invoice.",
+  "intermediate_ocr": "paddle_layout_content.json"
+}

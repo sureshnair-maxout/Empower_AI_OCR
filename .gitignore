@@ -1,0 +1,95 @@
+# Python virtual environments
+.venv/
+.venv*/
+venv/
+env/
+
+# Python cache/bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Coverage/test/build artifacts
+.coverage
+.coverage.*
+htmlcov/
+dist/
+build/
+site/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+*.pem
+*.key
+*.crt
+
+# Storage
+storage/
+logs/
+*.log
+*.out
+*.err
+
+# Local result/debug artifacts
+*_result.json
+*_results/
+*_retest.json
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Temporary
+tmp/
+temp/
+*.tmp
+*.bak
+~$*
+
+# Build artifacts
+dist/
+build/
+*.whl
+*.tar.gz
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# OS/editor
+Thumbs.db
+Desktop.ini

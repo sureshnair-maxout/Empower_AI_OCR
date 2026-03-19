@@ -1,0 +1,15 @@
+{
+  "file": "D:\\Documents\\0124.pdf",
+  "invoice_number": null,
+  "confidence": 0.0,
+  "method": "not_found",
+  "text_source": "glmocr_markdown",
+  "quality_low": true,
+  "candidate_sources": [
+    "glmocr_markdown",
+    "glmocr_prompt_markdown",
+    "glmocr_markdown",
+    "pypdf2_embedded_text"
+  ],
+  "errors": []
+}

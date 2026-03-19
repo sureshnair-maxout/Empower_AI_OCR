@@ -1,0 +1,140 @@
+version: "3.9"
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: ocr_postgres
+    environment:
+      POSTGRES_USER: ocr_user
+      POSTGRES_PASSWORD: ocr_password
+      POSTGRES_DB: ocr_db
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ocr_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ocr_user -d ocr_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: ocr_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ocr_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Ollama LLM Service (optional - use if not running on host)
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ocr_ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   networks:
+  #     - ocr_network
+  #   environment:
+  #     OLLAMA_MODELS: glm-ocr
+
+  # Jaeger Tracing (for observability)
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: ocr_jaeger
+    ports:
+      - "16686:16686"  # UI
+      - "14268:14268"  # HTTP collector
+      - "6831:6831/udp"  # Agent
+    networks:
+      - ocr_network
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+
+  # OpenTelemetry Collector (optional - for advanced observability)
+  # otel-collector:
+  #   image: otel/opentelemetry-collector:latest
+  #   container_name: ocr_otel_collector
+  #   command: ["/etc/otel-collector-config.yml"]
+  #   volumes:
+  #     - ./otel-collector-config.yml:/etc/otel-collector-config.yml
+  #   ports:
+  #     - "4317:4317"  # OTLP gRPC
+  #     - "4318:4318"  # OTLP HTTP
+  #   networks:
+  #     - ocr_network
+
+  # OCR API Application
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: ocr_api
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      DATABASE_URL: postgresql+asyncpg://ocr_user:ocr_password@postgres:5432/ocr_db
+      REDIS_URL: redis://redis:6379/0
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      LLM_PROVIDER: llama
+      LLAMA_MODEL_NAME: llama3.2-vision:11b
+      LLM_TIMEOUT_SECONDS: 180
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+      DEBUG: ${DEBUG:-false}
+      DEPLOYMENT_MODE: ${DEPLOYMENT_MODE:-tenant}
+      ENABLE_BILLING: ${ENABLE_BILLING:-true}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      jaeger:
+        condition: service_started
+    volumes:
+      - ./storage:/app/storage
+      - ./logs:/app/logs
+    networks:
+      - ocr_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Optional: NGINX Reverse Proxy
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: ocr_nginx
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #     - ./ssl:/etc/nginx/ssl:ro
+  #   depends_on:
+  #     - api
+  #   networks:
+  #     - ocr_network
+
+volumes:
+  postgres_data:
+  redis_data:
+  # ollama_data:
+
+networks:
+  ocr_network:
+    driver: bridge

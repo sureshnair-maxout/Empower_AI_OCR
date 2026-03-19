@@ -1,0 +1,15 @@
+{
+  "processing_time": 272.75285,
+  "file": "D:\\Documents\\0124.pdf",
+  "file_size_mb": 0.08771324157714844,
+  "layout_detection_enabled": true,
+  "backend": "Ollama 0.17.0",
+  "glm_ocr_sdk": "v0.1.1",
+  "api_endpoint": "localhost:11434/api/generate",
+  "pages": 1,
+  "regions_on_first_page": 5,
+  "regions_by_label": {
+    "text": 3,
+    "image": 2
+  }
+}

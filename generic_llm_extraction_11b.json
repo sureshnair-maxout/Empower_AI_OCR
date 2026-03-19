@@ -1,0 +1,9 @@
+{
+  "invoice_number": "XXXXX",
+  "irn": "XXXXX",
+  "invoice_date": "DD-MMM-YY",
+  "seller_name": "XXXXX",
+  "buyer_name": "XXXXX",
+  "total_amount": "XXXXX.XX",
+  "currency": "INR"
+}
