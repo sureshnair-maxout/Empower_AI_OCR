@@ -22,6 +22,13 @@ logger = logging.getLogger(__name__)
 class LlamaVisionProvider(LLMProvider):
     """Llama 3.2 Vision provider for OCR processing."""
 
+    OUTPUT_SCHEMA_FILE_MAP = {
+        "INVOICE": "invoice.json",
+        "AADHAAR_CARD": "aadhaar_card.json",
+        "PAN_CARD": "pan_card.json",
+        "CHEQUE": "cheque.json",
+    }
+
     def __init__(
         self,
         base_url: str = settings.ollama_base_url,
@@ -190,6 +197,41 @@ class LlamaVisionProvider(LLMProvider):
         b64 = base64.b64encode(raw).decode("ascii")
         return f"data:{mime};base64,{b64}"
 
+    @staticmethod
+    def _is_non_retryable_vm_error(status: int, error_text: str) -> bool:
+        """Return True when VM response indicates a deterministic failure.
+
+        These errors are not expected to recover with retries and should fail fast.
+        """
+        if 400 <= status < 500 and status != 429:
+            return True
+
+        lowered = (error_text or "").lower()
+        deterministic_markers = [
+            "triton",
+            "cuda_utils",
+            "returned non-zero exit status",
+            "/usr/bin/gcc",
+            "-lcuda",
+            "undefined symbol",
+            "cannot open shared object file",
+        ]
+        return any(marker in lowered for marker in deterministic_markers)
+
+    @staticmethod
+    def _build_vm_error_with_hint(error_text: str) -> str:
+        """Attach a concise VM-side remediation hint for known runtime failures."""
+        lowered = (error_text or "").lower()
+        if "triton" in lowered or "cuda_utils" in lowered or "/usr/bin/gcc" in lowered:
+            return (
+                "VM OCR API runtime failure (non-retryable): "
+                f"{error_text}. "
+                "Likely VM-side Triton/CUDA toolchain issue. Verify NVIDIA driver visibility, "
+                "libcuda availability, and GCC build dependencies on the VM; then restart "
+                "the OVIS API server."
+            )
+        return error_text
+
     async def _process_ocr_vm(self, request: OCRRequest, selected_model: str) -> OCRResponse:
         """Process OCR using remote VM OpenAI-compatible endpoint on port 8000."""
         doc_path = Path(request.document_path)
@@ -230,7 +272,10 @@ class LlamaVisionProvider(LLMProvider):
                     ) as resp:
                         if resp.status != 200:
                             error_text = await resp.text()
-                            raise RuntimeError(f"VM OCR API failed: {resp.status} - {error_text}")
+                            failure_text = f"VM OCR API failed: {resp.status} - {error_text}"
+                            if self._is_non_retryable_vm_error(resp.status, error_text):
+                                raise RuntimeError(self._build_vm_error_with_hint(failure_text))
+                            raise RuntimeError(failure_text)
 
                         data = await resp.json()
                         content = data.get("choices", [{}])[0].get("message", {}).get("content", "")
@@ -277,6 +322,10 @@ class LlamaVisionProvider(LLMProvider):
             except Exception as exc:
                 last_exc = exc
                 logger.error(f"VM attempt {attempt + 1} failed: {exc}")
+
+                # Do not retry deterministic failures that require VM/runtime intervention.
+                if isinstance(exc, RuntimeError) and "non-retryable" in str(exc).lower():
+                    raise
 
         raise RuntimeError(f"VM OCR processing failed after retries: {last_exc}")
 
@@ -420,32 +469,83 @@ class LlamaVisionProvider(LLMProvider):
         Returns:
             Structured prompt string.
         """
-        if document_type.upper() == "INVOICE":
+        normalized_doc_type = document_type.upper()
+        output_schema = self._load_output_schema(normalized_doc_type)
+
+        if output_schema is not None:
+            schema_json = json.dumps(output_schema, ensure_ascii=False, separators=(",", ":"))
+
+            if normalized_doc_type == "INVOICE":
+                return (
+                    "Find the field values in the document and provide in the JSON format as given below. Output ONLY the JSON format, no other text outputs.\n"
+                    "\n"
+                    "Standards to follow:\n"
+                    "- Turn off reasoning traces and return final JSON only.\n"
+                    "- For each extracted field include a corresponding confidence field with a value between 0 and 1.\n"
+                    "- GST Number (GSTIN) must follow format ##AAAAA####A#Z#.\n"
+                    "- quantity, rate, and amount must be numeric only with no UOM or currency indicators.\n"
+                    "- Repeat item objects in items for as many invoice line items as are present.\n"
+                    "- Use empty string for missing values and 0 for missing confidence.\n"
+                    "\n"
+                    "Required JSON structure:\n"
+                    f"{schema_json}\n"
+                    "Do not add extra keys. Return ONLY valid JSON."
+                )
+
+            if normalized_doc_type == "CHEQUE":
+                return (
+                    "Find the field values in this CHEQUE document and provide output in the required JSON format. "
+                    "Output ONLY valid JSON and no other text.\n"
+                    "\n"
+                    "Standards to follow:\n"
+                    "- Turn off reasoning traces and return final JSON only.\n"
+                    "- For each extracted field include a corresponding confidence field with a value between 0 and 1.\n"
+                    "- ALWAYS set cheque_number from the first portion/segment of the MICR field at the bottom of the cheque.\n"
+                    "- Use empty string for missing values and 0 for missing confidence.\n"
+                    "\n"
+                    "Required JSON structure:\n"
+                    f"{schema_json}\n"
+                    "Do not add extra keys. Return ONLY valid JSON."
+                )
+
             return (
-                "Find the field values in the document and provide in the JSON format as given below. Output ONLY the JSON format, no other text outputs.\n"
+                f"Find the field values in this {normalized_doc_type} document and provide output in the required JSON format. "
+                "Output ONLY valid JSON and no other text.\n"
                 "\n"
                 "Standards to follow:\n"
                 "- Turn off reasoning traces and return final JSON only.\n"
                 "- For each extracted field include a corresponding confidence field with a value between 0 and 1.\n"
-                "- GST Number (GSTIN) must follow format ##AAAAA####A#Z#.\n"
-                "- quantity, rate, and amount must be numeric only with no UOM or currency indicators.\n"
-                "- Repeat item objects in items for as many invoice line items as are present.\n"
                 "- Use empty string for missing values and 0 for missing confidence.\n"
                 "\n"
                 "Required JSON structure:\n"
-                "{"
-                "\"vendor_details\":{\"vendor_name\":\"\",\"vendor_name_confidence\":0,\"vendor_address\":\"\",\"vendor_address_confidence\":0,\"vendor_gst_no\":\"\",\"vendor_gst_no_confidence\":0,\"vendor_mobile_no_1\":\"\",\"vendor_mobile_no_1_confidence\":0,\"vendor_mobile_no_2\":\"\",\"vendor_mobile_no_2_confidence\":0,\"email_id\":\"\",\"email_id_confidence\":0,\"agent_broker_name\":\"\",\"agent_broker_name_confidence\":0},"
-                "\"invoice_details\":{\"invoice_date\":\"\",\"invoice_date_confidence\":0,\"invoice_no\":\"\",\"invoice_no_confidence\":0,\"invoice_type\":\"\",\"invoice_type_confidence\":0,\"bill_to\":\"\",\"bill_to_confidence\":0,\"po_no\":\"\",\"po_no_confidence\":0,\"eway_bill_no\":\"\",\"eway_bill_no_confidence\":0,\"acknowledge_no\":\"\",\"acknowledge_no_confidence\":0},"
-                "\"transport_details\":{\"vehicle_no\":\"\",\"vehicle_no_confidence\":0,\"driver_name\":\"\",\"driver_name_confidence\":0,\"driver_no\":\"\",\"driver_no_confidence\":0},"
-                "\"bank_details\":{\"account_holder_name\":\"\",\"account_holder_name_confidence\":0,\"account_number\":\"\",\"account_number_confidence\":0,\"ifsc_code\":\"\",\"ifsc_code_confidence\":0},"
-                "\"items\":[{\"item_no\":\"\",\"item_no_confidence\":0,\"item_name\":\"\",\"item_name_confidence\":0,\"hsn_code\":\"\",\"hsn_code_confidence\":0,\"gst_percent\":\"\",\"gst_percent_confidence\":0,\"uom\":\"\",\"uom_confidence\":0,\"quantity\":\"\",\"quantity_confidence\":0,\"rate\":\"\",\"rate_confidence\":0,\"amount\":\"\",\"amount_confidence\":0}]"
-                "}\n"
+                f"{schema_json}\n"
                 "Do not add extra keys. Return ONLY valid JSON."
             )
 
         # Generic document extraction
         return """Extract all visible text and key information from this document image.
 Return the information in a structured JSON format."""
+
+    def _load_output_schema(self, document_type: str) -> Optional[dict]:
+        """Load per-document output schema from config/output_schemas."""
+        schema_file = self.OUTPUT_SCHEMA_FILE_MAP.get(document_type)
+        if not schema_file:
+            return None
+
+        schema_path = Path(__file__).resolve().parents[3] / "config" / "output_schemas" / schema_file
+        if not schema_path.exists():
+            logger.warning("Output schema file not found for %s at %s", document_type, schema_path)
+            return None
+
+        try:
+            with schema_path.open("r", encoding="utf-8") as f:
+                loaded = json.load(f)
+                if isinstance(loaded, dict):
+                    return loaded
+        except Exception as exc:
+            logger.warning("Failed to load output schema for %s: %s", document_type, exc)
+
+        return None
 
     def _parse_llama_response(self, response_text: str) -> dict:
         """Parse Llama's response and extract fields.

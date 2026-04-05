@@ -1,0 +1,14 @@
+{
+  "pan_details": {
+    "pan_number": "",
+    "pan_number_confidence": 0,
+    "name_on_card": "",
+    "name_on_card_confidence": 0,
+    "father_name": "",
+    "father_name_confidence": 0,
+    "date_of_birth": "",
+    "date_of_birth_confidence": 0,
+    "category": "",
+    "category_confidence": 0
+  }
+}

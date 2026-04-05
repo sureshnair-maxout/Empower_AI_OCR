@@ -49,7 +49,7 @@ class Settings(BaseSettings):
 
     # Database
     # Use asyncpg for SQLAlchemy async engine
-    database_url: str = "postgresql+asyncpg://ocr_user:ocr_password@localhost:5432/ocr_db"
+    database_url: str = "postgresql+asyncpg://ocr_user:ocr_password@127.0.0.1:5432/ocr_db"
     database_pool_size: int = 10
     database_echo: bool = False
 
@@ -68,7 +68,7 @@ class Settings(BaseSettings):
     llm_provider: str = "llama"  # Options: "ollama" (GLM-OCR), "llama" (Llama 3.2 Vision)
     ollama_base_url: str = "http://localhost:11434"
     llm_deployment_mode: Literal["local", "vm"] = "local"
-    llm_vm_base_url: str = "http://localhost:8000"
+    llm_vm_base_url: str = "http://45.194.46.160:8000"
     llm_vm_api_key: str = ""
     llm_vm_api_key_header: Literal["x-api-key", "authorization"] = "x-api-key"
     llm_vm_enable_thinking: bool = False

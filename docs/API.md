@@ -52,7 +52,7 @@ Form fields:
 - `document_type_code` (required): e.g., `INVOICE`, `CHEQUE`, `PO`, `LR`, `PAN_CARD`, `AADHAAR_CARD`
 - `provider_name` (optional): `llama` | `ollama` | `sglang`
 - `deployment_mode` (optional): `vm` | `local`
-- `vm_base_url` (optional): e.g., `http://64.247.196.84:8000`
+- `vm_base_url` (optional): e.g., `http://45.194.46.160:8000`
 - `model_name` (optional): model override (e.g., `AIDC-AI/Ovis2.5-9B`)
 - `prompt_override` (optional): prompt override text
 
@@ -65,7 +65,7 @@ curl -X POST "http://localhost:8000/api/v1/ocr/process" \
   -F "document_type_code=INVOICE" \
   -F "provider_name=llama" \
   -F "deployment_mode=vm" \
-  -F "vm_base_url=http://64.247.196.84:8000" \
+  -F "vm_base_url=http://45.194.46.160:8000" \
   -F "model_name=AIDC-AI/Ovis2.5-9B"
 ```
 

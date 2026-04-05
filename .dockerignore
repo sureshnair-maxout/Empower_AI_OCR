@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+.eggs/
+dist/
+build/
+*.whl
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Storage / large data
+storage/
+docker/storage/
+docker/logs/
+
+# Test artifacts & debug outputs
+*.json
+layout_*.txt
+layout_diag*.txt
+server.err
+*.md
+tests/
+htmlcov/
+.coverage
+.pytest_cache/
+
+# Git
+.git/
+.gitignore
+.github/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Alembic migrations (large __pycache__)
+migrations/
+
+# Scripts (not needed in image)
+scripts/
+
+# Docs
+docs/
+
+# Result dirs from local experiments
+glmocr_direct_test/
+glmocr_layout_after_fix/
+glmocr_layout_after_reinstall/
+glmocr_layout_cli_retest/
+glmocr_layout_results/
+glmocr_ollama_results/
+test_layout_baseline_-_no_layout/
+test_layout_layout_enabled/

@@ -259,8 +259,6 @@ async def sandbox_page() -> HTMLResponse:
           <select id="documentType">
             <option value="INVOICE">INVOICE</option>
             <option value="CHEQUE">CHEQUE</option>
-            <option value="PO">PO</option>
-            <option value="LR">LR</option>
             <option value="PAN_CARD">PAN_CARD</option>
             <option value="AADHAAR_CARD">AADHAAR_CARD</option>
           </select>
@@ -285,7 +283,7 @@ async def sandbox_page() -> HTMLResponse:
 
         <div class="form-group">
           <label class="label" for="vmBaseUrl">VM Base URL</label>
-          <input id="vmBaseUrl" type="text" value="http://64.247.196.84:8000" placeholder="http://host:8000" />
+          <input id="vmBaseUrl" type="text" value="http://45.194.46.160:8000" placeholder="http://host:8000" />
         </div>
 
         <div class="form-group">
@@ -424,7 +422,7 @@ async def sandbox_page() -> HTMLResponse:
       documentTypeInput.value = 'INVOICE';
       providerNameInput.value = 'llama';
       deploymentModeInput.value = 'vm';
-      vmBaseUrlInput.value = 'http://64.247.196.84:8000';
+      vmBaseUrlInput.value = 'http://45.194.46.160:8000';
       modelNameInput.value = 'AIDC-AI/Ovis2.5-9B';
       documentFileInput.value = '';
       promptOverrideInput.value = '';

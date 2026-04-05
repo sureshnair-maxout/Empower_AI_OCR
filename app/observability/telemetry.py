@@ -1,11 +1,12 @@
 """OpenTelemetry instrumentation and setup."""
 
 import logging
+import socket
 from typing import Optional
+from urllib.parse import urlparse
 from fastapi import FastAPI
 
 from opentelemetry import metrics, trace
-from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExporter
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
@@ -21,6 +22,28 @@ from app.core.database import async_engine
 logger = logging.getLogger(__name__)
 
 
+def _is_otlp_endpoint_reachable(endpoint: str) -> bool:
+    """Return True if OTLP endpoint host:port is reachable."""
+    if not endpoint:
+        return False
+
+    parsed = urlparse(endpoint)
+    host = parsed.hostname
+    port = parsed.port
+
+    if not host:
+        return False
+
+    if port is None:
+        port = 443 if parsed.scheme == "https" else 4317
+
+    try:
+        with socket.create_connection((host, port), timeout=0.5):
+            return True
+    except OSError:
+        return False
+
+
 def setup_otel(app: Optional[FastAPI] = None) -> None:
     """Initialize OpenTelemetry instrumentation.
 
@@ -30,6 +53,16 @@ def setup_otel(app: Optional[FastAPI] = None) -> None:
     """
     if not settings.otel_enabled:
         logger.info("OpenTelemetry is disabled")
+        return
+
+    if (
+        settings.otel_exporter_type == "otlp"
+        and not _is_otlp_endpoint_reachable(settings.otel_exporter_otlp_endpoint)
+    ):
+        logger.warning(
+            "OTLP endpoint %s is unreachable; skipping OpenTelemetry exporter setup",
+            settings.otel_exporter_otlp_endpoint,
+        )
         return
 
     try:
@@ -42,6 +75,7 @@ def setup_otel(app: Optional[FastAPI] = None) -> None:
             )
             trace_provider.add_span_processor(BatchSpanProcessor(otlp_exporter))
         elif settings.jaeger_enabled:
+            from opentelemetry.exporter.jaeger.thrift import JaegerExporter  # noqa: PLC0415
             jaeger_exporter = JaegerExporter(
                 agent_host_name=settings.jaeger_agent_host,
                 agent_port=settings.jaeger_agent_port,

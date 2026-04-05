@@ -1,0 +1,26 @@
+{
+  "cheque_details": {
+    "cheque_number": "",
+    "cheque_number_confidence": 0,
+    "cheque_date": "",
+    "cheque_date_confidence": 0,
+    "bank_name": "",
+    "bank_name_confidence": 0,
+    "branch_name": "",
+    "branch_name_confidence": 0,
+    "ifsc_code": "",
+    "ifsc_code_confidence": 0,
+    "account_number": "",
+    "account_number_confidence": 0,
+    "micr_code": "",
+    "micr_code_confidence": 0,
+    "payee_name": "",
+    "payee_name_confidence": 0,
+    "amount_in_words": "",
+    "amount_in_words_confidence": 0,
+    "amount_numeric": "",
+    "amount_numeric_confidence": 0,
+    "signatory_name": "",
+    "signatory_name_confidence": 0
+  }
+}

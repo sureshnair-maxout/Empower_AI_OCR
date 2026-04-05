@@ -1,0 +1,18 @@
+{
+  "aadhaar_details": {
+    "aadhaar_number": "",
+    "aadhaar_number_confidence": 0,
+    "name": "",
+    "name_confidence": 0,
+    "dob": "",
+    "dob_confidence": 0,
+    "gender": "",
+    "gender_confidence": 0,
+    "address": "",
+    "address_confidence": 0,
+    "care_of": "",
+    "care_of_confidence": 0,
+    "mobile_no": "",
+    "mobile_no_confidence": 0
+  }
+}

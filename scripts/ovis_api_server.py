@@ -2,7 +2,9 @@ import argparse
 import base64
 import io
 import os
+import sysconfig
 import time
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import requests
@@ -21,7 +23,29 @@ ENABLE_THINKING = os.getenv("OVIS_ENABLE_THINKING", "false").lower() == "true"
 ENABLE_THINKING_BUDGET = os.getenv("OVIS_ENABLE_THINKING_BUDGET", "false").lower() == "true"
 THINKING_BUDGET = int(os.getenv("OVIS_THINKING_BUDGET", "1024"))
 USE_FAST_PROCESSOR = os.getenv("OVIS_USE_FAST_PROCESSOR", "true").lower() == "true"
-ATTN_IMPLEMENTATION = os.getenv("OVIS_ATTN_IMPLEMENTATION", "sdpa")
+# Default to eager for better runtime portability on VM deployments.
+# Operators can still override via OVIS_ATTN_IMPLEMENTATION.
+ATTN_IMPLEMENTATION = os.getenv("OVIS_ATTN_IMPLEMENTATION", "eager")
+
+
+def ensure_python_dev_headers() -> None:
+    """Fail fast with actionable guidance when Python.h is unavailable."""
+    include_dir = sysconfig.get_paths().get("include")
+    if not include_dir:
+        return
+
+    python_h = Path(include_dir) / "Python.h"
+    if python_h.exists():
+        return
+
+    raise RuntimeError(
+        "Missing Python development headers: Python.h not found at "
+        f"{python_h}. Install python3.11-dev (or the matching pythonX.Y-dev for this interpreter), "
+        "then restart the OVIS API server."
+    )
+
+
+ensure_python_dev_headers()
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"

@@ -58,7 +58,7 @@ async def main() -> None:
 #        'prompt': 'Table Recognition: Consider the whole invoice as a big complex table with or without headings and format all the content into a meaningful complex table',
     payload = {
         'model': 'glm-ocr:latest',
-        'prompt': """Text Recognition: Extract all text from this invoice and return in Markdown, omiting any any content in table format.
+        'prompt': """Text Recognition: Extract all text from this invoice and return in Markdown, omiting any content in table format.
 Preserve reading order, emphasize structures like bolding, headers, tables formatting and section/grouping as much as possible.
 Return only Markdown.""",
     #    'prompt': prompt_text,
